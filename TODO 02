@@ -1,0 +1,19 @@
+def get_pet_labels(image_dir):
+    filename_list = listdir(image_dir)
+    results_dic = dict()
+    words = []
+    for file in filename_list:
+        file = file.lower()
+        words = file.split("_")
+        word = ""
+        for each in words:
+            if each.isalpha():
+                word = word + " " + each
+        word = word.strip(" ")
+        if word in results_dic:
+            if not isinstance(results_dic[word], list):
+                results_dic[word] = [results_dic[word]]
+            results_dic[word].append(file)
+        else:
+            results_dic[word] = file
+    return results_dic
